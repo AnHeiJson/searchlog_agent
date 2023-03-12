@@ -14,4 +14,31 @@ go语言编写，高性能，低资源消耗。
 将searchlog agent部署在需要被检索/收集/分析日志的设备上，通过API接口（https协议）下发任务，
 
 
-编译安装（Linux）：
+源码编译安装（Linux）：
+1、安装go环境
+2、在searchlog_agent目录下执行命令：cd src;go build;mv -f searchlog ../;cd ../
+
+运行（Linux）：
+./searchlog
+
+配置文件目录config说明：
+
+1、server.key和server.pem文件是用于开启HTTPS协议的证书文件，当前为样例，请自行生成后替换。
+
+2、config.ini文件
+
+[All]                           # 公共配置
+allowIps=127.0.0.1,127.0.0.2    # 允许访问的IP白名单，填写server端的IP地址，多个之间用逗号分隔。不在白名单内的地址访问会返回403。
+listenIp=10.10.10.63            # 监听的本机地址
+listenPort=8000                 # 监听的本机端口
+
+[LogSearch]                     # 日志检索配置
+maxCount=1000                   # 每次检索的最大符合条件的日志条数
+retUrl=https://127.0.0.1:8000   # 检索完成后调用的URL，告知本次任务已完成
+esHost=https://gcp.cloud.es.io  # 用于保存检索日志的ES地址
+esUser=elastic                  # 用于保存检索日志的ES用户名
+esPass=LO7pH7JGmn4ED6ftrJlWoU   # 用于保存检索日志的ES密码
+
+[RunScript]                     # 运行自定义脚本配置
+scriptPath=script               # 脚本存放路径
+
