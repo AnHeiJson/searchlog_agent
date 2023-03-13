@@ -42,3 +42,11 @@ esPass=LO7pH7JGmn4ED6ftrJlWoU   # 用于保存检索日志的ES密码
 [RunScript]                     # 运行自定义脚本配置
 scriptPath=script               # 脚本存放路径
 
+
+接口说明：
+
+GET  /agent/isAvailable       # 测试此Agent是否可用
+
+POST /agent/log/freeSearch    # 日志检索
+
+POST /agent/run/script        # 运行自定义脚本配置
